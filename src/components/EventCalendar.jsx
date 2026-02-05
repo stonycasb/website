@@ -8,18 +8,12 @@ export default function EventCalendar() {
   const [tooltip, setTooltip] = useState(null);
 
   useEffect(() => {
-    // Fetch the ICS file using a CORS proxy
-    const icsUrl = 'https://calendar.google.com/calendar/ical/4kki6p5cjl2oacr0eq9ei6ojsc%40group.calendar.google.com/public/basic.ics';
+    // Import and fetch the local ICS file
+    import('../assets/holidays.ics?raw')
+      .then(module => {
+        console.log('Calendar data loaded, parsing...');
+        const data = module.default;
 
-    console.log('Fetching calendar data...');
-
-    fetch(`https://corsproxy.io/?${encodeURIComponent(icsUrl)}`)
-      .then(response => {
-        console.log('Calendar response received:', response.status);
-        return response.text();
-      })
-      .then(data => {
-        console.log('Calendar data received, parsing...');
         // Parse the ICS data
         const jcalData = ICAL.parse(data);
         const comp = new ICAL.Component(jcalData);
@@ -44,7 +38,6 @@ export default function EventCalendar() {
       })
       .catch(error => {
         console.error('Error loading calendar:', error);
-        // Set empty events array so calendar still shows
         setEvents([]);
       });
   }, []);
