@@ -136,26 +136,40 @@ export default function EventCalendar() {
             padding: 8px;
             font-weight: 500;
           }
+          .fc .fc-daygrid-day-frame {
+            min-height: 120px;
+          }
           .fc .fc-event {
             background-color: #da2928;
             border-color: #da2928;
             cursor: pointer;
-            padding: 2px 4px;
-            border-radius: 3px;
+            padding: 6px 8px;
+            border-radius: 4px;
             color: white;
+            font-size: 13px;
+            white-space: normal;
+            margin-bottom: 4px;
           }
           .fc .fc-event:hover {
             background-color: #c02524;
           }
           .fc .fc-daygrid-event {
-            margin: 2px;
-            padding: 2px 4px;
+            margin: 3px 2px;
+            padding: 6px 8px;
           }
           .fc-event-title {
             color: white;
+            font-weight: 500;
+            overflow: visible;
+            white-space: normal;
           }
           .fc-event-time {
             color: white;
+            font-weight: 600;
+            margin-right: 4px;
+          }
+          .fc .fc-daygrid-event-dot {
+            display: none;
           }
         `}
       </style>

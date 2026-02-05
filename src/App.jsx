@@ -8,15 +8,15 @@ export default function App() {
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Start fade out after 2 seconds
+    // Start fade out after 0.8 seconds
     const fadeTimer = setTimeout(() => {
       setFadeOut(true);
-    }, 1000);
+    }, 800);
 
     // Remove splash screen after fade completes
     const removeTimer = setTimeout(() => {
       setShowSplash(false);
-    }, 2800);
+    }, 1300);
 
     return () => {
       clearTimeout(fadeTimer);
@@ -38,7 +38,7 @@ export default function App() {
           justifyContent: 'center',
           backgroundColor: '#ffffff',
           opacity: fadeOut ? 0 : 1,
-          transition: 'opacity 0.8s ease-out',
+          transition: 'opacity 0.5s ease-out',
         }}
       >
         <img
@@ -60,7 +60,7 @@ export default function App() {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        animation: 'fadeIn 0.8s ease-in',
+        animation: 'fadeIn 0.5s ease-in',
       }}
     >
       <style>
