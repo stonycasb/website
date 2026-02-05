@@ -11,9 +11,15 @@ export default function EventCalendar() {
     // Fetch the ICS file using a CORS proxy
     const icsUrl = 'https://calendar.google.com/calendar/ical/4kki6p5cjl2oacr0eq9ei6ojsc%40group.calendar.google.com/public/basic.ics';
 
+    console.log('Fetching calendar data...');
+
     fetch(`https://corsproxy.io/?${encodeURIComponent(icsUrl)}`)
-      .then(response => response.text())
+      .then(response => {
+        console.log('Calendar response received:', response.status);
+        return response.text();
+      })
       .then(data => {
+        console.log('Calendar data received, parsing...');
         // Parse the ICS data
         const jcalData = ICAL.parse(data);
         const comp = new ICAL.Component(jcalData);
@@ -33,10 +39,13 @@ export default function EventCalendar() {
           };
         });
 
+        console.log('Events parsed:', parsedEvents.length);
         setEvents(parsedEvents);
       })
       .catch(error => {
         console.error('Error loading calendar:', error);
+        // Set empty events array so calendar still shows
+        setEvents([]);
       });
   }, []);
 
